@@ -25,9 +25,9 @@ const MongoDBStore = require('connect-mongo')(session);
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
-    useCreateIndex: true,
+   
     useUnifiedTopology: true,
-    useFindAndModify: false
+    
 });
 
 const db = mongoose.connection;
