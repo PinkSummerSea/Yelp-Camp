@@ -15,7 +15,7 @@ const LocalStrategy = require('passport-local');
 const campgroundsRoutes = require('./routes/campgrounds');
 const reviewsRoutes = require('./routes/reviews');
 const usersRoutes = require('./routes/users');
-const User = require('./models/user');
+
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require("helmet");
 
@@ -25,7 +25,9 @@ const MongoDBStore = require('connect-mongo')(session);
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 const db = mongoose.connection;
@@ -33,6 +35,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
     console.log('Database connected')
 })
+
+const User = require('./models/user');
 
 const app = express();
 
